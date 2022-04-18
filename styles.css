@@ -66,10 +66,10 @@ body {
     padding:2vmin;
     border-radius: 5px;
     display:grid;
-    gap: 2vmin;
+    gap: var(--cell-gap);
     background-color:#200B3A; 
-    grid-template-columns: repeat(4,10vmin);
-    grid-template-rows:repeat(4,10vmin);
+    grid-template-columns: repeat(var(--grid-size),var(--cell-size));
+    grid-template-rows:repeat(var(--grid-size),var(--cell-size));
 }
 
 .cell{
@@ -83,12 +83,12 @@ body {
     display:flex;
     justify-content: center;
     align-items: center;
-    width:10vmin;
-    height:10vmin;
+    width:var(--cell-size);
+    height:var(--cell-size);
     border-radius: 5px;
     background-color: aqua;
-    top: 14vmin;
-    left:2vmin;
+    top: calc(var(--y)*(var(--cell-size)+var(--cell-gap))+var(--cell-gap));
+    left: calc(var(--x)*(var(--cell-size)+var(--cell-gap))+var(--cell-gap));
     font-size: 4vmin;
     animation: show 200ms ease-in-out;
     transition: 150ms ease-in-out;
