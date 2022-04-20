@@ -86,9 +86,10 @@ body {
     width:var(--cell-size);
     height:var(--cell-size);
     border-radius: 5px;
-    background-color: aqua;
-    top: calc(var(--y)*(var(--cell-size)+var(--cell-gap))+var(--cell-gap));
-    left: calc(var(--x)*(var(--cell-size)+var(--cell-gap))+var(--cell-gap));
+    background-color: rgb(142, 161, 161);
+    color:black;
+    top: calc(var(--row) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    left: calc(var(--col) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
     font-size: 4vmin;
     animation: show 200ms ease-in-out;
     transition: 150ms ease-in-out;

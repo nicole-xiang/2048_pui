@@ -15,16 +15,35 @@ export default class Board {
             return new Cell(cell, index % grid_size, Math.floor(index/grid_size))
         })
     }
+    // get all empty cells (no tile) 
+    get #emptyCells(){
+        return this.#cells.filter(cell => cell.tile == null); 
+    }
+    // get a random empty cell 
+    emptyCell(){
+        const randomIndex = Math.floor(Math.random() * this.#emptyCells.length);
+        return this.#emptyCells[randomIndex];
+    }
 }
-// 
+// cell class
 class Cell {
     #cell
-    #x
-    #y
-    constructor(cell, x, y){
+    #row
+    #col
+    #tile
+    constructor(cell, row, col){
         this.#cell = cell;
-        this.#x = x;
-        this.#y = y;
+        this.#row = row;
+        this.#col = col;
+    }
+    get tile(){
+        return this.#tile
+    }
+    set tile(val){
+        if (val == null) return
+        this.#tile = val;
+        this.#tile.row = this.#row;
+        this.#tile.col = this.#col;
     }
 }
 // create board cells 

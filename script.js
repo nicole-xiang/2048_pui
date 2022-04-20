@@ -1,5 +1,9 @@
 import Board from "./board.js"
+import Tile from "./tile.js"
 
-const gameBoard = document.getElementById("game-board");
+let gameBoard = document.getElementById("game-board")
 // create new board
-const board = new Board(gameBoard);
+let board = new Board(gameBoard)
+board.emptyCell().tile = new Tile(gameBoard)
+board.emptyCell().tile = new Tile(gameBoard)
+console.log(board.emptyCell())
