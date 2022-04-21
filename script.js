@@ -6,4 +6,30 @@ let gameBoard = document.getElementById("game-board")
 let board = new Board(gameBoard)
 board.emptyCell().tile = new Tile(gameBoard)
 board.emptyCell().tile = new Tile(gameBoard)
-console.log(board.emptyCell())
+setInput()
+// set up user input 
+function setInput(){
+    window.addEventListener("keydown", setEvent, {once: true})
+}
+// handle user input 
+function setEvent(e){
+    console.log(e.key);
+    switch (e.key){
+        case "ArrowUp":
+            moveUp()
+            break
+        case "ArrowDown":
+            moveUp()
+            break
+        case "ArrowRight":
+            moveUp()
+            break
+        case "ArrowLeft":
+            moveUp()
+            break
+        default: 
+            setInput()
+            return
+    }
+    setInput()
+}

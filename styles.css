@@ -10,9 +10,6 @@
 }
 body {
     height:100vh;
-    /* display:flex;
-    justify-content: center;
-    align-items: center; */
     background-color: #200B3A;
 }
 /* top section */
@@ -79,15 +76,17 @@ body {
 
 /* tile */
 .tile{
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
     position:absolute; 
     display:flex;
     justify-content: center;
     align-items: center;
     width:var(--cell-size);
     height:var(--cell-size);
-    border-radius: 5px;
-    background-color: rgb(142, 161, 161);
-    color:black;
+    border-radius: 1vmin;    
+    background-color:var(--bg-color);
+    color:var(--num-color);
     top: calc(var(--row) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
     left: calc(var(--col) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
     font-size: 4vmin;
