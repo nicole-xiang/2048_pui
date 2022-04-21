@@ -24,6 +24,22 @@ export default class Board {
         const randomIndex = Math.floor(Math.random() * this.#emptyCells.length);
         return this.#emptyCells[randomIndex];
     }
+    // get 2D array of board by row
+    get boardByRow(){
+        return this.#cells.reduce((grid, cell) => {
+            grid[cell.row] = grid[cell.row] || []
+            grid[cell.row][cell.col] = cell
+            return grid
+        },[]) 
+    }
+    // get 2D array of board by col
+    get boardByCol(){
+        return this.#cells.reduce((grid, cell) => {
+            grid[cell.col] = grid[cell.col] || []
+            grid[cell.col][cell.row] = cell
+            return grid
+        },[]) 
+    }
 }
 // cell class
 class Cell {
@@ -31,19 +47,45 @@ class Cell {
     #row
     #col
     #tile
+    #mergeTile
     constructor(cell, row, col){
         this.#cell = cell;
         this.#row = row;
         this.#col = col;
     }
+    // get position
+    get row(){
+        return this.#row
+    }
+    get col(){
+        return this.#col
+    }
+    // get tile
     get tile(){
         return this.#tile
     }
     set tile(val){
-        if (val == null) return
         this.#tile = val;
+        if (val == null) return
         this.#tile.row = this.#row;
         this.#tile.col = this.#col;
+    }
+    get mergeTile(){
+        return this.#mergeTile;
+    }
+    set mergeTile(val){
+        this.#mergeTile = val;
+        if (val == null) return;
+        this.#mergeTile.row = this.row;
+        this.#mergeTile.col = this.col;
+    }
+    // valid if tile is null or same value as current 
+    isValid(tile){
+        if (this.tile == null) return true;
+        console.log(this.tile.value)
+        console.log(tile.value)
+        if (this.mergeTile == null && this.tile.value === tile.value) return true;
+        return false;
     }
 }
 // create board cells 

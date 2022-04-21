@@ -1,7 +1,7 @@
 const colors = {
     2: "#DDE9FE",
-    4: "#C3AFEF",
-    8: "#96DBE0",
+    4: "#96DBE0",
+    8: "#C3AFEF",
     16: "#FE9A7A",
     32: "#ED6B67",
     64: "#F6A1BA",
@@ -20,8 +20,11 @@ export default class Tile {
     constructor(board, num = Math.random() > 0.5 ? 2 : 4){
         this.#tileEle = document.createElement("div");
         this.#tileEle.classList.add("tile");
-        this.value = num; 
         board.append(this.#tileEle);
+        this.value = num; 
+    }
+    get value(){
+        return this.#value;
     }
     // set number value, colors 
     set value(num){
@@ -33,7 +36,6 @@ export default class Tile {
         }
         else this.#tileEle.style.setProperty("--num-color", "white");
     }
-
     // set position
     set row(val){
         this.#row = val;
@@ -42,5 +44,5 @@ export default class Tile {
     set col(val){
         this.#col = val;
         this.#tileEle.style.setProperty("--col", val);
-    }   
+    }  
 }

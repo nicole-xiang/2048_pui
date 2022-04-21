@@ -6,30 +6,71 @@ let gameBoard = document.getElementById("game-board")
 let board = new Board(gameBoard)
 board.emptyCell().tile = new Tile(gameBoard)
 board.emptyCell().tile = new Tile(gameBoard)
-setInput()
+setInput();
 // set up user input 
 function setInput(){
     window.addEventListener("keydown", setEvent, {once: true})
 }
 // handle user input 
 function setEvent(e){
-    console.log(e.key);
     switch (e.key){
         case "ArrowUp":
-            moveUp()
+            moveUp();
             break
         case "ArrowDown":
-            moveUp()
+            moveDown()
             break
         case "ArrowRight":
-            moveUp()
+            moveRight()
             break
         case "ArrowLeft":
-            moveUp()
+            moveLeft()
             break
         default: 
             setInput()
             return
     }
     setInput()
+}
+
+function moveUp(){
+    return slideTiles(board.boardByCol)
+}
+function moveDown(){
+    return slideTiles(board.boardByCol.map(row => [...row].reverse()))
+}
+function moveLeft(){
+    return slideTiles(board.boardByRow)
+}
+function moveRight(){
+    return slideTiles(board.boardByRow.map(col => [...col].reverse()))
+}
+// slide cells 
+function slideTiles(cells){
+    cells.forEach(group => {
+        for (let i = 1; i < group.length; i++){
+            const cell = group[i]
+            if (cell.tile == null) continue
+            console.log(cell)
+            let targetCell = null 
+            // loop through rest of cells 
+            for (let j = i-1; j >=0; j--){
+                const possCell = group[j] // get potential cell 
+                if (!possCell.isValid(cell.tile)) break;
+                targetCell = possCell;
+            }
+            // if there is a place to move to 
+            if (targetCell != null){
+                // merge if tile exists in target cell
+                if (targetCell.tile != null){
+                    targetCell.mergeTile = cell.tile
+                } 
+                else {
+                    targetCell.tile = cell.tile // move + sets target cell
+                }
+                // gets rid of the current tile 
+                cell.tile = null
+            }
+        }
+    })
 }
