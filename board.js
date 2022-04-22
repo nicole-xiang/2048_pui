@@ -6,7 +6,7 @@ let cell_size = 10;
 // sets board style 
 export default class Board {
     #cells
-    constructor(board){
+    constructor(board, score = 0, best = 0){
         board.style.setProperty("--grid-size", grid_size);
         board.style.setProperty("--cell-size", `${cell_size}vmin`);
         board.style.setProperty("--cell-gap", `${cell_gap}vmin`);
@@ -14,7 +14,14 @@ export default class Board {
         this.#cells = createCells(board).map((cell, index) => {
             return new Cell(cell, index % grid_size, Math.floor(index/grid_size))
         })
+        this.score = score;
+        this.bestScore = best; 
+        setScore(this.score, this.bestScore); 
     }
+    get cells(){
+        return this.#cells;
+    }
+
     // get all empty cells (no tile) 
     get #emptyCells(){
         return this.#cells.filter(cell => cell.tile == null); 
@@ -39,6 +46,17 @@ export default class Board {
             grid[cell.col][cell.row] = cell
             return grid
         },[]) 
+    }
+    // calculate current score after merge
+    calcScore(mergedTile){
+        console.log("scores:");
+        console.log(mergedTile.value);
+        this.score += mergedTile.value * 2;
+        if (this.score > this.bestScore){
+            this.bestScore = this.score;
+        }
+        console.log(this.score, this.bestScore);
+        setScore(this.score, this.bestScore); 
     }
 }
 // cell class
@@ -82,11 +100,17 @@ class Cell {
     // valid if tile is null or same value as current 
     isValid(tile){
         if (this.tile == null) return true;
-        console.log(this.tile.value)
-        console.log(tile.value)
         if (this.mergeTile == null && this.tile.value === tile.value) return true;
         return false;
     }
+    // merge same value tiles
+    mergeTiles(){
+        if (this.tile == null || this.mergeTile == null) return
+        this.tile.value = this.tile.value + this.mergeTile.value;
+        this.mergeTile.removeTile()
+        this.mergeTile = null; 
+    }
+    
 }
 // create board cells 
 function createCells(board){
@@ -99,4 +123,9 @@ function createCells(board){
         board.append(cell);
     }
     return cells;
+}
+
+function setScore(score, bestScore){
+    document.getElementById('curr-score').innerHTML = score; 
+    document.getElementById('best-score').innerHTML = bestScore;
 }

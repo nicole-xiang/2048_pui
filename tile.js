@@ -23,6 +23,9 @@ export default class Tile {
         board.append(this.#tileEle);
         this.value = num; 
     }
+    removeTile(){
+        this.#tileEle.remove();
+    }
     get value(){
         return this.#value;
     }

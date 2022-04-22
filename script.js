@@ -4,6 +4,7 @@ import Tile from "./tile.js"
 let gameBoard = document.getElementById("game-board")
 // create new board
 let board = new Board(gameBoard)
+
 board.emptyCell().tile = new Tile(gameBoard)
 board.emptyCell().tile = new Tile(gameBoard)
 setInput();
@@ -30,7 +31,9 @@ function setEvent(e){
             setInput()
             return
     }
+    board.cells.forEach(cell => cell.mergeTiles());
     setInput()
+    board.emptyCell().tile = new Tile(gameBoard)
 }
 
 function moveUp(){
@@ -51,7 +54,6 @@ function slideTiles(cells){
         for (let i = 1; i < group.length; i++){
             const cell = group[i]
             if (cell.tile == null) continue
-            console.log(cell)
             let targetCell = null 
             // loop through rest of cells 
             for (let j = i-1; j >=0; j--){
@@ -63,7 +65,8 @@ function slideTiles(cells){
             if (targetCell != null){
                 // merge if tile exists in target cell
                 if (targetCell.tile != null){
-                    targetCell.mergeTile = cell.tile
+                    targetCell.mergeTile = cell.tile;
+                    board.calcScore(targetCell.mergeTile);
                 } 
                 else {
                     targetCell.tile = cell.tile // move + sets target cell
