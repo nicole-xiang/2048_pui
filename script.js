@@ -1,6 +1,70 @@
 import Board from "./board.js"
 import Tile from "./tile.js"
 
+let songs = ['music/lofi.mp3','music/pokemon.mp3']; 
+$(function(){
+    let i = 1;
+    if (document.getElementsByClassName('pokemon').length == 0){
+        i = 0;
+    }
+	let music = new Howl({
+		src: [songs[i]],
+        loop: true,
+        // html5: true,
+		volume: 0.75
+	});
+
+	$("#play").on("click", function(){
+        console.log(music);
+        if (!music.playing()){
+            console.log("start");
+            music.play();
+        }
+	});
+
+	$("#pause").on("click", function(){
+		music.pause();
+	});
+
+	$("#volup").on("click", function(){
+		var vol = music.volume();
+		vol += 0.1;
+		if (vol > 1) {
+			vol = 1;
+		}
+		music.volume(vol);
+	});
+
+	$("#voldown").on("click", function(){
+		var vol = music.volume();
+		vol -= 0.1;
+		if (vol < 0) {
+			vol = 0;
+		}
+		music.volume(vol);
+	});
+    $("#prev").on("click", function(){
+        music.stop();
+        music = new Howl({
+            src: songs[0],
+            loop: true,
+            html5: true,
+            volume: 0.75
+        });
+        music.play();
+	});
+    $("#next").on("click", function(){
+        music.stop();
+        music = new Howl({
+            src: songs[1],
+            loop: true,
+            html5: true,
+            volume: 0.75
+        });
+        music.play();
+	});
+});
+
 let gameBoard = document.getElementById("game-board")
 // create new board or get existing board
 // let board = localStorage.getItem('board');

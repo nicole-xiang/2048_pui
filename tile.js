@@ -53,7 +53,7 @@ export default class Tile {
             if (num == "2" || num == "4" || num == "8"){
                 this.#tileEle.style.setProperty("--num-color", "#4A395F");
             }
-            else this.#tileEle.style.setProperty("--num-color", "rgba(0, 0, 0, 0)");
+            else this.#tileEle.style.setProperty("--num-color", "white");
         }
         else{
             this.#tileEle.style.setProperty("--bg-img", `url(${pokemons[num]})`);

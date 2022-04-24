@@ -47,7 +47,7 @@ body {
 #mode{
     font-size:2.5vmin;
     font-weight: 500;
-    background:white;
+    background:#baa9ce;;
     border-radius: 5px;
     color:black;
     text-align: center;
@@ -116,4 +116,13 @@ body {
         opacity: 0.5;
         transform:scale(0);
     }
+}
+.play-controllers{
+    margin: auto;
+    display:flex;
+}
+.music-butn{
+    cursor: pointer;
+    margin:0.5%;
+    font-size:4vmin;
 }
