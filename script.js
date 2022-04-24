@@ -10,7 +10,7 @@ $(function(){
 	let music = new Howl({
 		src: [songs[i]],
         loop: true,
-        // html5: true,
+        html5: true,
 		volume: 0.75
 	});
 
