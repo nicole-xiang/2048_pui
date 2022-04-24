@@ -15,8 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,900;1,300&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h1 class="title pokemon">2048</h1>
+<body class="pokemon">
+    <h1 class="title">2048</h1>
     <div id="topbar">
         <a href="" id="new-game">New Game</a>
         <div class="score"> 
@@ -29,13 +29,13 @@
         </div>
 
     </div>
-    <div id="main-content"> 
+    <div class="pokemon-board" id="main-content"> 
         <div id="game-board"></div>
     </div>
     <br>
-    <a href="index.html" id="mode">Classic Mode</a>
+    <a href="index.html" class="mode pokemon-btn">Classic Mode</a>
     <br>
-    <div class="play-controllers">
+    <div class="play-controllers pokemon-controllers">
         <div class="music-butn" id='play'><ion-icon name="play-circle-outline"></ion-icon></div>
         <div class="music-butn" id='pause'><ion-icon name="pause-circle-outline"></ion-icon></div>
         <div class="music-butn" id='volup'><ion-icon name="volume-high-outline"></ion-icon></div>

@@ -43,26 +43,6 @@ $(function(){
 		}
 		music.volume(vol);
 	});
-    $("#prev").on("click", function(){
-        music.stop();
-        music = new Howl({
-            src: songs[0],
-            loop: true,
-            html5: true,
-            volume: 0.75
-        });
-        music.play();
-	});
-    $("#next").on("click", function(){
-        music.stop();
-        music = new Howl({
-            src: songs[1],
-            loop: true,
-            html5: true,
-            volume: 0.75
-        });
-        music.play();
-	});
 });
 
 let gameBoard = document.getElementById("game-board")
