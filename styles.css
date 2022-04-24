@@ -8,6 +8,10 @@
     color:white;
     background-color: #200B3A;
 }
+#mode:hover{
+    color:white;
+    background-color: #200B3A;
+}
 body {
     height:100vh;
     background-color: #200B3A;
@@ -39,6 +43,16 @@ body {
     margin:0;
     text-align: center;
     margin-right: 8%;
+}
+#mode{
+    font-size:2.5vmin;
+    font-weight: 500;
+    background:white;
+    border-radius: 5px;
+    color:black;
+    text-align: center;
+    padding:0.5%;
+    margin-left:39.25%;
 }
 .score{
     margin:0;
@@ -85,6 +99,9 @@ body {
     width:var(--cell-size);
     height:var(--cell-size);
     border-radius: 1vmin;    
+    background-image: var(--bg-img);
+    background-size:cover;
+    background-repeat:no-repeat;
     background-color:var(--bg-color);
     color:var(--num-color);
     top: calc(var(--row) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));

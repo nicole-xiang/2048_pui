@@ -14,8 +14,15 @@ export default class Board {
         this.#cells = createCells(board).map((cell, index) => {
             return new Cell(cell, index % grid_size, Math.floor(index/grid_size))
         })
+        let bestScore = localStorage.getItem('bestScore')
+        if (bestScore){
+            this.bestScore = parseInt(bestScore);
+        }
+        else{
+            this.bestScore = best; 
+        }
         this.score = score;
-        this.bestScore = best; 
+         
         setScore(this.score, this.bestScore); 
     }
     get cells(){
@@ -49,13 +56,11 @@ export default class Board {
     }
     // calculate current score after merge
     calcScore(mergedTile){
-        console.log("scores:");
-        console.log(mergedTile.value);
         this.score += mergedTile.value * 2;
         if (this.score > this.bestScore){
             this.bestScore = this.score;
         }
-        console.log(this.score, this.bestScore);
+        localStorage.setItem('bestScore',this.bestScore);
         setScore(this.score, this.bestScore); 
     }
 }

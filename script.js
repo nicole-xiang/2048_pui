@@ -2,9 +2,19 @@ import Board from "./board.js"
 import Tile from "./tile.js"
 
 let gameBoard = document.getElementById("game-board")
-// create new board
+// create new board or get existing board
+// let board = localStorage.getItem('board');
+// if (board){
+//     // pass 
+// }
+// else {
+//     board = new Board(gameBoard)
+//     board.emptyCell().tile = new Tile(gameBoard)
+//     board.emptyCell().tile = new Tile(gameBoard)
+//     console.log(board);
+//     localStorage.setItem('board',JSON.stringify(board));
+// }
 let board = new Board(gameBoard)
-
 board.emptyCell().tile = new Tile(gameBoard)
 board.emptyCell().tile = new Tile(gameBoard)
 setInput();
@@ -33,7 +43,8 @@ function setEvent(e){
     }
     board.cells.forEach(cell => cell.mergeTiles());
     setInput()
-    board.emptyCell().tile = new Tile(gameBoard)
+    if (board.emptyCell() != null)
+        board.emptyCell().tile = new Tile(gameBoard)
 }
 
 function moveUp(){
