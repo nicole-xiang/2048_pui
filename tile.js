@@ -20,9 +20,9 @@ const pokemons = {
     16: "images/squirtle.png",
     32: "images/psyduck.jpeg",
     64: "images/jigglypuff.png",
-    128: "images/gulpin.jpeg",
+    128: "images/shinx.jpeg",
     256:"images/vulpix.png",
-    512: "images/luvdisc.png",
+    512: "images/minccino.png",
     1024: "images/emolga.png",
     2048: "images/psyduck_funny.jpeg",
     4096: "images/surprised_pikachu.png"
@@ -69,4 +69,10 @@ export default class Tile {
         this.#col = val;
         this.#tileEle.style.setProperty("--col", val);
     }  
+    // wait for animation to finish then get new tile 
+    waitForTransition(animation = false){
+        return new Promise(resolve => {
+            this.#tileEle.addEventListener(animation? "animationend" : "transitionend", resolve, {once:true})
+        })
+    }
 }

@@ -1,6 +1,7 @@
 import Board from "./board.js"
 import Tile from "./tile.js"
 
+// howler: referred to https://github.com/goldfire/howler.js#examples
 let songs = ['music/lofi.mp3','music/pokemon.mp3']; 
 $(function(){
     let i = 1;
@@ -15,9 +16,7 @@ $(function(){
 	});
 
 	$("#play").on("click", function(){
-        console.log(music);
         if (!music.playing()){
-            console.log("start");
             music.play();
         }
 	});
@@ -66,31 +65,81 @@ setInput();
 function setInput(){
     window.addEventListener("keydown", setEvent, {once: true})
 }
-// handle user input 
-function setEvent(e){
+// handle user input
+// wait for animation/movement, then add new tile  
+async function setEvent(e){
     switch (e.key){
         case "ArrowUp":
-            moveUp();
+            if (!canMoveUp()){
+                setInput();
+                return; 
+            }
+            await moveUp();
             break
         case "ArrowDown":
-            moveDown()
+            if (!canMoveDown()){
+                setInput();
+                return; 
+            }
+            await moveDown()
             break
         case "ArrowRight":
-            moveRight()
+            if (!canMoveRight()){
+                setInput();
+                return; 
+            }
+            await moveRight()
             break
         case "ArrowLeft":
-            moveLeft()
+            if (!canMoveLeft()){
+                setInput();
+                return; 
+            }
+            await moveLeft()
             break
         default: 
             setInput()
             return
     }
     board.cells.forEach(cell => cell.mergeTiles());
-    setInput()
-    if (board.emptyCell() != null)
-        board.emptyCell().tile = new Tile(gameBoard)
+    let newTile = new Tile(gameBoard); 
+    if (board.emptyCell() != null){
+        board.emptyCell().tile = newTile;
+    }
+    if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()){
+        newTile.waitForTransition(true).then(()=>{
+            alert("you lose");
+        });
+        return
+    }
+    setInput();
 }
 
+function canMoveUp() {
+    return validMove(board.boardByCol);
+}
+function canMoveDown() {
+    return validMove(board.boardByCol.map(row => [...row].reverse()));
+}
+function canMoveLeft() {
+    return validMove(board.boardByRow);
+}
+function canMoveRight() {
+    return validMove(board.boardByRow.map(col => [...col].reverse()));
+}
+function validMove(cells){
+    return cells.some(group => {
+        return group.some((cell,index)=>{
+            // can't move top cell 
+            if (index === 0) return false;
+            // can't move empty cell 
+            if (cell.tile == null) return false; 
+            // potential cell 
+            const targetCell = group[index-1];
+            return targetCell.isValid(cell.tile); 
+        })
+    })
+}
 function moveUp(){
     return slideTiles(board.boardByCol)
 }
@@ -105,7 +154,10 @@ function moveRight(){
 }
 // slide cells 
 function slideTiles(cells){
-    cells.forEach(group => {
+    return Promise.all(
+    // flatten into 1D array
+    cells.flatMap(group => {
+        const promises = [];
         for (let i = 1; i < group.length; i++){
             const cell = group[i]
             if (cell.tile == null) continue
@@ -118,6 +170,8 @@ function slideTiles(cells){
             }
             // if there is a place to move to 
             if (targetCell != null){
+                // add movement/animation to promises array
+                promises.push(cell.tile.waitForTransition());
                 // merge if tile exists in target cell
                 if (targetCell.tile != null){
                     targetCell.mergeTile = cell.tile;
@@ -130,5 +184,6 @@ function slideTiles(cells){
                 cell.tile = null
             }
         }
-    })
+        return promises; 
+    }))
 }
