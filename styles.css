@@ -67,6 +67,10 @@ body {
 .pokemon-btn{
     background-color: azure;
 }
+.pokemon-btn:hover{
+    color:white;
+    background-color: rgb(68, 156, 207);
+}
 .score{
     margin:0;
     text-align: center;
