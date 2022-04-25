@@ -15,37 +15,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,900;1,300&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body class="pokemon">
+<body>
     <h1 class="title">2048</h1>
-    <div id="topbar">
-        <a href="" id="new-game">New Game</a>
-        <div class="score"> 
-            <p>Score</p>
-            <p id="curr-score"></p>
-        </div>
-        <div class="score"> 
-            <p>Best</p>
-            <p id="best-score">0</p>
-        </div>
-
+    <div class="intro"> 
+        <h3>How to Play</h3>
+        <p>Tiles with matching number values can be merged into a single tile, which receives the values' sum.<br>
+            To move the board, use the directional arrows. To win, get a 2048 tile.</p>
+        <ion-icon name="arrow-up-outline"></ion-icon>
+        <ion-icon name="arrow-down-outline"></ion-icon>
+        <ion-icon name="arrow-back-outline"></ion-icon>    
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+        <br><br>
+        <a href="index.html"><p id="start">Start Playing</p></a>
     </div>
-    <div class="pokemon-board" id="main-content"> 
-        <div id="game-board"></div>
-    </div>
-    <br>
-    <a href="index.html" class="mode pokemon-btn">Classic Mode</a>
-    <!-- instructions section -->
-    <a href="instructions.html" id = "instructions">How to Play</a>
-    <br>
-    <div class="play-controllers pokemon-play-controllers">
-        <div class="music-butn" id='play'><ion-icon name="play-circle-outline"></ion-icon></div>
-        <div class="music-butn" id='pause'><ion-icon name="pause-circle-outline"></ion-icon></div>
-        <div class="music-butn" id='volup'><ion-icon name="volume-high-outline"></ion-icon></div>
-        <div class="music-butn" id='voldown'><ion-icon name="volume-low-outline"></ion-icon></div>
-    </div>
-
     <!-- footer -->
-    <div class="footer pokemon-footer">
+    <div class="footer">
         <p>created by nicole xiang | remake of <a href="https://play2048.co/">https://play2048.co/</a></p>
         <div class="icons">
             <a href="mailto:xinyixia@andrew.cmu.edu" target="_blank"><ion-icon name="mail-outline"></ion-icon></a>
@@ -53,7 +37,6 @@
             <a href="https://www.instagram.com/nicole.xy_x/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
         </div>
     </div>
-    <!-- <br> -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
