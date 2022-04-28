@@ -81,7 +81,21 @@ body {
     padding:0;
     margin:0;
 }
-
+#board-size button{
+    background-color:#e1d7ec;
+    border:#baa9ce 1px solid;
+    padding:1% 2%;
+    font-size: 2.25vmin;
+    border-radius: 5px;
+    color:black;
+    margin:2%; 
+    cursor: pointer;
+}
+/* #board-size{
+    width:25%;
+    margin:0 auto;
+    text-align: center;
+} */
 /* game section */
 #main-content{
     /* height:90vh; */

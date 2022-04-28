@@ -6,8 +6,7 @@ let cell_size = 10;
 // sets board style 
 export default class Board {
     #cells
-    constructor(board, grid_size = 4, score = 0, best = 0){
-        console.log(grid_size);
+    constructor(board, score = 0, best = 0){
         board.style.setProperty("--grid-size", grid_size);
         board.style.setProperty("--cell-size", `${cell_size}vmin`);
         board.style.setProperty("--cell-gap", `${cell_gap}vmin`);
