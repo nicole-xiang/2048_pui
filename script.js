@@ -57,7 +57,23 @@ let gameBoard = document.getElementById("game-board")
 //     console.log(board);
 //     localStorage.setItem('board',JSON.stringify(board));
 // }
-let board = new Board(gameBoard)
+let grid_size = 4;
+// function setSize(size){
+//     grid_size = size;
+//     console.log("grid size: ");
+//     console.log(grid_size);
+// }
+$("#4by4").on("click", function(){
+    grid_size = 4;
+});
+$("#5by5").on("click", function(){
+    grid_size = 5;
+});
+$("#6by6").on("click", function(){
+    grid_size = 6;
+});
+console.log(grid_size);
+let board = new Board(gameBoard, grid_size)
 board.emptyCell().tile = new Tile(gameBoard)
 board.emptyCell().tile = new Tile(gameBoard)
 setInput();
@@ -108,7 +124,7 @@ async function setEvent(e){
     }
     if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()){
         newTile.waitForTransition(true).then(()=>{
-            alert("you lose");
+            alert("you lost! Start over by clicking on new game!");
         });
         return
     }
